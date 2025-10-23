@@ -422,6 +422,9 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
+	"all": [
+		"beams.beams.cron.send_escalation_notifications"
+	],
 	"daily": [
 		"beams.beams.doctype.local_enquiry_report.local_enquiry_report.set_status_to_overdue",
 		"beams.beams.custom_scripts.attendance.attendance.notify_manager_unplanned_absence",

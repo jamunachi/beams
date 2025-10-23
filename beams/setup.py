@@ -76,6 +76,7 @@ def after_install():
 	create_custom_fields(get_supplier_quotation_item_custom_fields(), ignore_validate=True)
 	create_custom_fields(get_purchase_receipt_item_custom_fields(), ignore_validate=True)
 	create_custom_fields(get_hd_team_custom_fields(), ignore_validate=True)
+	create_custom_fields(get_hd_settings_custom_fields(), ignore_validate=True)
 	
 	setup_notifications()
 
@@ -209,6 +210,41 @@ def get_hd_ticket_type_custom_fields():
 		]
 	}
 
+def get_hd_settings_custom_fields():
+	'''
+		Custom fields that need to be added to the HD Settings DocType
+	'''
+	return {
+		"HD Settings": [
+			{
+				"fieldname": "notifications_template",
+				"fieldtype": "Section Break",
+				"label": "Notifications Templates",
+				"insert_after": "track_service_level_agreement"
+			},
+			{
+				"fieldname": "enable_scalation_otifications",
+				"fieldtype": "Check",
+				"label": "Enable Escalation Notifications",
+				"insert_after": "notifications_template"
+			},
+			{
+				"fieldname": "response_due_template",
+				"fieldtype": "Link",
+				"label": "Response Due Template",
+				"options": "Email Template",
+				"insert_after": "enable_scalation_otifications"
+			},
+			{
+				"fieldname": "resolution_due_template",
+				"fieldtype": "Link",
+				"label": "Resolution Due Template",
+				"options": "Email Template",
+				"insert_after": "response_due_template"
+			}
+		]
+	}
+
 def get_hd_ticket_custom_fields():
 	'''
 	Custom fields to be added to the HD Ticket Doctype
@@ -233,8 +269,21 @@ def get_hd_ticket_custom_fields():
 				"label": "Employee Name",
 				"insert_after": "raised_by",
 				"read_only": 1,
+			},
+			{
+				"fieldname": "response_due_escalation_send",
+				"fieldtype": "Check",
+				"label": "Response Due Escalation Send",
+				"read_only": 1,
+				"insert_after": "ticket_section_break"
+			},
+			{
+				"fieldname": "resolution_due_escalation_send",
+				"fieldtype": "Check",
+				"label": "Resolution Due Escalation Send",
+				"read_only": 1,
+				"insert_after": "response_due_escalation_send"
 			}
-
 		]
 	}
 
@@ -5721,6 +5770,14 @@ def get_hd_team_custom_fields():
 				"label": "Agents",
 				"options": "Ticket Agents",
 				"insert_after": "team_name"
+			},
+			{
+				"fieldname": "escalation_to",
+				"fieldtype": "Link",
+				"label": "Escalation To",
+				"options": "User",
+				"description": "Notification will send to this user, on SLA Breach",
+				"insert_after": "agents"
 			}
 		]
 	}
