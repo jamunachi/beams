@@ -223,7 +223,7 @@ def get_hd_settings_custom_fields():
 				"insert_after": "track_service_level_agreement"
 			},
 			{
-				"fieldname": "enable_scalation_otifications",
+				"fieldname": "enable_escalation_notifications",
 				"fieldtype": "Check",
 				"label": "Enable Escalation Notifications",
 				"insert_after": "notifications_template"
@@ -233,7 +233,7 @@ def get_hd_settings_custom_fields():
 				"fieldtype": "Link",
 				"label": "Response Due Template",
 				"options": "Email Template",
-				"insert_after": "enable_scalation_otifications"
+				"insert_after": "enable_escalation_notifications"
 			},
 			{
 				"fieldname": "resolution_due_template",
